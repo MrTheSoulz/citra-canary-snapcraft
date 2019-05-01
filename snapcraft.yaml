@@ -1,5 +1,5 @@
 name: citra-canary
-version: canary-1341
+version: git
 summary: Nintendo 3DS Emulator
 confinement: strict
 base: core18
