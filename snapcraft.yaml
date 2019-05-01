@@ -5,7 +5,7 @@ base: core18
 grade: stable
 #icon: https://github.com/citra-emu/citra/raw/master/dist/icon.png
 architectures:
-  - build-on: i386
+  - build-on: [amd64, i386]
     run-on: [amd64, i386]
 
 summary: Nintendo 3DS Emulator
