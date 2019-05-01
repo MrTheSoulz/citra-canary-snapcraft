@@ -1,0 +1,65 @@
+name: ffmpeg
+version: '4.1'
+summary: A complete solution to record, convert and stream audio and video.
+description: |
+  FFmpeg is the leading multimedia framework, able to decode, encode,
+  transcode, mux, demux, stream, filter and play pretty much anything that
+  humans and machines have created. It supports the most obscure ancient formats
+  up to the cutting edge. No matter if they were designed by some standards
+  committee, the community or a corporation.
+architectures:
+- amd64
+confinement: strict
+grade: stable
+apps:
+  ffmpeg:
+    command: command-ffmpeg.wrapper
+    environment:
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_PLATFORM/mesa:$SNAP/usr/lib/$SNAPCRAFT_ARCH_PLATFORM/mesa-egl:$LIBGL_DRIVERS_PATH:/var/lib/snapd/lib/gl
+      LIBGL_DRIVERS_PATH: $SNAP/usr/lib/$SNAPCRAFT_ARCH_PLATFORM/dri
+    plugs:
+    - alsa
+    - camera
+    - desktop
+    - hardware-observe
+    - home
+    - network-bind
+    - network
+    - opengl
+    - optical-drive
+    - pulseaudio
+    - removable-media
+    - wayland
+    - x11
+  ffplay:
+    command: command-ffplay.wrapper
+    plugs:
+    - alsa
+    - camera
+    - desktop
+    - hardware-observe
+    - home
+    - network-bind
+    - network
+    - opengl
+    - optical-drive
+    - pulseaudio
+    - removable-media
+    - wayland
+    - x11
+  ffprobe:
+    command: command-ffprobe.wrapper
+    plugs:
+    - alsa
+    - camera
+    - desktop
+    - hardware-observe
+    - home
+    - network-bind
+    - network
+    - opengl
+    - optical-drive
+    - pulseaudio
+    - removable-media
+    - wayland
+    - x11

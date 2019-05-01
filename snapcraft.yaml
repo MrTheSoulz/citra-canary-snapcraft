@@ -26,23 +26,21 @@ parts:
   wrapper:
     plugin: nil
     organize:
-      'citra-canary': bin/citra-canary
-      'citra-nightly': bin/citra-nightly
+      'citra-canary': bin/canary
+      'citra-nightly': bin/nightly
     after: [citra-nightly]
   
   citra-canary:
     plugin: cmake
     source: https://github.com/citra-emu/citra-canary.git
     source-tag: canary-1343
-    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/bin/citra-canary]
-    make-parameters: [-j $SNAPCRAFT_PARALLEL_BUILD_COUNT]
+    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/bin/canary]
     after: [prepare]
   
   citra-nightly:
     plugin: cmake
     source: https://github.com/citra-emu/citra-nightly.git
-    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/bin/citra-nightly]
-    make-parameters: [-j $SNAPCRAFT_PARALLEL_BUILD_COUNT]
+    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/bin/nightly]
     after: [citra-canary]
     
   desktop-qt5:
@@ -55,10 +53,12 @@ parts:
 
 apps:
 
-  citra-canary:
-    command: desktop-launch bin/citra-canary/bin/citra-qt
+  citra-mts-canary:
+    command: desktop-launch bin/canary/bin/citra-qt
     plugs: [home, network, pulseaudio, alsa, x11, wayland, desktop, desktop-legacy, opengl, screen-inhibit-control]
+    #desktop: bin/canary/share/applications/citra.desktop
 
-  citra-nightly:
-    command: desktop-launch bin/citra-nightly/bin/citra-qt
+  citra-mts-nightly:
+    command: desktop-launch bin/nightly/bin/citra-qt
     plugs: [home, network, pulseaudio, alsa, x11, wayland, desktop, desktop-legacy, opengl, screen-inhibit-control]
+    #desktop: bin/canary/share/applications/citra.desktop

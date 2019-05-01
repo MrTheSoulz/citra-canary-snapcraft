@@ -1,0 +1,12 @@
+prefix=/root/stage/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib/x86_64-linux-gnu
+includedir=${prefix}/include
+
+Name: glesv2
+Description: Mesa OpenGL ES 2.0 library
+Requires.private:
+Version: 18.2.8
+Libs: -L${libdir} -lGLESv2
+Libs.private: -lm -lpthread -pthread -ldl
+Cflags: -I${includedir}
