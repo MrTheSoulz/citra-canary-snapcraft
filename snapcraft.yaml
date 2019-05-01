@@ -53,12 +53,12 @@ parts:
 
 apps:
 
-  citra-mts-canary:
+  citra-canary:
     command: desktop-launch bin/canary/bin/citra-qt
     plugs: [home, network, pulseaudio, alsa, x11, wayland, desktop, desktop-legacy, opengl, screen-inhibit-control]
     #desktop: bin/canary/share/applications/citra.desktop
 
-  citra-mts-nightly:
+  citra-nightly:
     command: desktop-launch bin/nightly/bin/citra-qt
     plugs: [home, network, pulseaudio, alsa, x11, wayland, desktop, desktop-legacy, opengl, screen-inhibit-control]
     #desktop: bin/canary/share/applications/citra.desktop
