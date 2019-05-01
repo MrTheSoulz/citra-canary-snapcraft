@@ -13,13 +13,13 @@ description: |
 parts:
   citra-canary:
     plugin: cmake
-    build-packages: [pkg-config, dpkg-dev, build-essential, libsdl2-dev, libfdk-aac-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
-    stage-packages: [libsdl2-dev, libfdk-aac-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
+    build-packages: [pkg-config, dpkg-dev, build-essential, libsdl2-dev, libfdk-aac-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev, clang]
+    stage-packages: [clang, libsdl2-dev, libfdk-aac-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
     source: https://github.com/citra-emu/citra-canary.git
     override-build: |
       cmake $SNAPCRAFT_PART_SRC -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
       make -j $SNAPCRAFT_PARALLEL_BUILD_COUNT
-      cp -r $SNAPCRAFT_PART_BUILD $SNAPCRAFT_PART_INSTALL
+      cp -r $SNAPCRAFT_PART_BUILD\bin $SNAPCRAFT_PART_INSTALL\bin
     after: [desktop-qt5]
   desktop-qt5:
     build-packages: [build-essential, qtbase5-dev, dpkg-dev]
