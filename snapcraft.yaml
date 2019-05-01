@@ -3,7 +3,7 @@ version: git
 confinement: strict
 base: core18
 grade: stable
-icon: icon.png
+icon: https://github.com/citra-emu/citra/raw/master/dist/icon.png
 architectures:
   - build-on: i386
     run-on: [amd64, i386]
