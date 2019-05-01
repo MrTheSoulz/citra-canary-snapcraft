@@ -17,7 +17,7 @@ parts:
     source: https://github.com/citra-emu/citra-canary.git
     stage-packages: [libsdl2-dev, libfdk-aac-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
     override-build: |
-      cmake ../src -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
+      cmake . -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
       make
       cp -r bin $SNAPCRAFT_PART_INSTALL/bin
     after: [desktop-qt5]
