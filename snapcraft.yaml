@@ -19,7 +19,7 @@ parts:
     override-build: |
       cmake $SNAPCRAFT_PART_SRC -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
       make
-      cp -r $SNAPCRAFT_PART_BUILD/bin $SNAPCRAFT_PART_INSTALL/bin
+      cp -r $SNAPCRAFT_PART_BUILD $SNAPCRAFT_PART_INSTALL/bin
     after: [desktop-qt5]
   desktop-qt5:
     build-packages: [build-essential, qtbase5-dev, dpkg-dev]
