@@ -1,4 +1,4 @@
-# citra-canary-snapcraft
+# citra-snapcraft
 
 [![Snap Status](https://build.snapcraft.io/badge/MrTheSoulz/citra-canary-snapcraft.svg)](https://build.snapcraft.io/user/MrTheSoulz/citra-canary-snapcraft)
 
