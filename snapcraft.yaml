@@ -14,7 +14,7 @@ parts:
   citra-canary:
     plugin: cmake
     build-packages: [libsdl2-dev, pkg-config, build-essential]
-    source: https://github.com/citra-emu/citra-canary/archive/$SNAPCRAFT_PROJECT_VERSION.tar.gz
+    source: https://github.com/citra-emu/citra-canary.git
     stage-packages: [libfdk-aac-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
     override-build: |
       mkdir build && cd build
