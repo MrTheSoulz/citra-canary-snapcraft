@@ -1,4 +1,4 @@
-name: citra
+name: citra-mts
 version: git
 confinement: strict
 base: core18
