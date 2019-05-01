@@ -18,7 +18,7 @@ parts:
     source: https://github.com/citra-emu/citra-canary.git
     override-build: |
       cmake $SNAPCRAFT_PART_SRC -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
-      make
+      make -j $SNAPCRAFT_PARALLEL_BUILD_COUNT
       cp -r $SNAPCRAFT_PART_BUILD $SNAPCRAFT_PART_INSTALL
     after: [desktop-qt5]
   desktop-qt5:
