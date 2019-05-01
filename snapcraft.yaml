@@ -15,11 +15,11 @@ parts:
     plugin: cmake
     build-packages: [libsdl2-dev, pkg-config, build-essential]
     source: https://github.com/citra-emu/citra-canary/archive/$SNAPCRAFT_PROJECT_VERSION.tar.gz
+    stage-packages: [libfdk-aac-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
     override-build: |
       mkdir build && cd build
       cmake ../src -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
       make
-      make DESTDIR=$SNAPCRAFT_PART_INSTALL
       cp -r bin $SNAPCRAFT_PART_INSTALL/bin
     after: [desktop-qt5]
   desktop-qt5:
