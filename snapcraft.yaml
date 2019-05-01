@@ -56,11 +56,9 @@ parts:
 apps:
 
   citra-canary:
-    command: desktop-launch bin/citra-canary/citra-qt
+    command: desktop-launch bin/citra-canary/bin/citra-qt
     plugs: [home, network, pulseaudio, alsa, x11, wayland, desktop, desktop-legacy, opengl, screen-inhibit-control]
-    desktop: bin/citra-canary/share/applications/citra.desktop
 
   citra-nightly:
-    command: desktop-launch bin/citra-nightly/citra-qt
+    command: desktop-launch bin/citra-nightly/bin/citra-qt
     plugs: [home, network, pulseaudio, alsa, x11, wayland, desktop, desktop-legacy, opengl, screen-inhibit-control]
-    desktop: bin/citra-nightly/share/applications/citra.desktop
