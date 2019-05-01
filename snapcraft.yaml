@@ -17,8 +17,8 @@ parts:
 
   prepare:
     plugin: nil
-    build-snaps: [ffmpeg] disabled for now
-    stage-snaps: [ffmpeg] diabled for now
+    build-snaps: [ffmpeg]
+    stage-snaps: [ffmpeg]
     build-packages: [pkg-config, dpkg-dev, build-essential, libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
     stage-packages: [libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
     after: [desktop-qt5]
