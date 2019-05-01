@@ -1,2 +1,0 @@
-#!/bin/sh
-exec "desktop-launch" "$SNAP/bin/citra-canary/bin/citra-qt" "$@"
