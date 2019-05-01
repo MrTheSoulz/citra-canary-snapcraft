@@ -34,18 +34,20 @@ parts:
     plugin: cmake
     source: https://github.com/citra-emu/citra-canary.git
     source-tag: canary-1343
-    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/bin/citra-canary]
+    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/bin/citra-canary]
+    make-parameters: [-j $SNAPCRAFT_PARALLEL_BUILD_COUNT]
     after: [prepare]
   
   citra-nightly:
     plugin: cmake
     source: https://github.com/citra-emu/citra-nightly.git
-    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/bin/citra-nightly]
+    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/bin/citra-nightly]
+    make-parameters: [-j $SNAPCRAFT_PARALLEL_BUILD_COUNT]
     after: [citra-canary]
     
   desktop-qt5:
     build-packages: [build-essential, qtbase5-dev, dpkg-dev]
-    make-parameters: [FLAVOR=qt5]
+    make-parameters: [FLAVOR=qt5 -j $SNAPCRAFT_PARALLEL_BUILD_COUNT]
     plugin: make
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: qt
