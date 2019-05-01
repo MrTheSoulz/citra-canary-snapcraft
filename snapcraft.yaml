@@ -13,9 +13,9 @@ description: |
 parts:
   citra-canary:
     plugin: cmake
-    build-packages: [libsdl2-dev, pkg-config, build-essential]
+    build-packages: [pkg-config, build-essential]
     source: https://github.com/citra-emu/citra-canary.git
-    stage-packages: [libfdk-aac-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
+    stage-packages: [libsdl2-dev, libfdk-aac-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
     override-build: |
       mkdir build && cd build
       cmake ../src -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
@@ -32,5 +32,5 @@ parts:
     stage-packages: [libxkbcommon0, ttf-ubuntu-font-family, dmz-cursor-theme, light-themes, adwaita-icon-theme, gnome-themes-standard, shared-mime-info, libqt5gui5, libgdk-pixbuf2.0-0, libqt5svg5, try: [appmenu-qt5, locales-all, xdg-user-dirs, fcitx-frontend-qt5]]
 apps:
   citra-canary:
-    command: sh $SNAP/bin/citra-qt
-    plugs: [home, network, pulseaudio, x11, desktop, opengl]
+    command: desktop-launch $SNAP/bin/citra-qt
+    plugs: [home, network, pulseaudio, x11, desktop, desktop-legacy, opengl]
