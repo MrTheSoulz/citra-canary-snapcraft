@@ -1,0 +1,36 @@
+name: citra-canary
+version: canary-1341
+summary: Nintendo 3DS Emulator
+confinement: strict
+base: core18
+grade: stable
+architectures:
+  - build-on: i386
+    run-on: [amd64, i386]
+description: |
+  Citra is a work-in-progress Nintendo 3DS emulator started in early 2014.
+  Citra can currently emulate, with varying degrees of success, a wide variety of different homebrew applications and commercial software.
+parts:
+  citra-canary:
+    plugin: cmake
+    build-packages: [libsdl2-dev, pkg-config, build-essential]
+    source: https://github.com/citra-emu/citra-canary/archive/$SNAPCRAFT_PROJECT_VERSION.tar.gz
+    override-build: |
+      mkdir build && cd build
+      cmake ../src -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
+      make
+      make DESTDIR=$SNAPCRAFT_PART_INSTALL
+      cp -r bin $SNAPCRAFT_PART_INSTALL/bin
+    after: [desktop-qt5]
+  desktop-qt5:
+    build-packages: [build-essential, qtbase5-dev, dpkg-dev]
+    make-parameters:
+      - FLAVOR=qt5
+    plugin: make
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: qt
+    stage-packages: [libxkbcommon0, ttf-ubuntu-font-family, dmz-cursor-theme, light-themes, adwaita-icon-theme, gnome-themes-standard, shared-mime-info, libqt5gui5, libgdk-pixbuf2.0-0, libqt5svg5, try: [appmenu-qt5, locales-all, xdg-user-dirs, fcitx-frontend-qt5]]
+apps:
+  citra-canary:
+    command: sh $SNAP/bin/citra-qt
+    plugs: [home, network, pulseaudio, x11, desktop, opengl]
