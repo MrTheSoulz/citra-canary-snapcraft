@@ -1,35 +1,63 @@
-name: citra-canary
+name: citra
 version: git
-summary: Nintendo 3DS Emulator
 confinement: strict
 base: core18
 grade: stable
+icon: icon.png
 architectures:
   - build-on: i386
     run-on: [amd64, i386]
+
+summary: Nintendo 3DS Emulator
 description: |
   Citra is a work-in-progress Nintendo 3DS emulator started in early 2014.
   Citra can currently emulate, with varying degrees of success, a wide variety of different homebrew applications and commercial software.
+
 parts:
+
+  prepare:
+    plugin: nil
+    build-snaps: [ffmpeg]
+    build-packages: [pkg-config, dpkg-dev, build-essential, libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
+    stage-packages: [libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
+    after: [desktop-qt5]
+
+  wrapper:
+    plugin: nil
+    organize:
+      'citra-canary': bin/citra-canary
+      'citra-nightly': bin/citra-nightly
+    after: [citra-nightly]
+  
   citra-canary:
     plugin: cmake
-    build-packages: [pkg-config, dpkg-dev, build-essential, libsdl2-dev, libfdk-aac-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev, clang]
-    stage-packages: [clang, libsdl2-dev, libfdk-aac-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
     source: https://github.com/citra-emu/citra-canary.git
-    override-build: |
-      cmake $SNAPCRAFT_PART_SRC -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
-      make -j $SNAPCRAFT_PARALLEL_BUILD_COUNT
-      cp -r $SNAPCRAFT_PART_BUILD\bin $SNAPCRAFT_PART_INSTALL\bin
-    after: [desktop-qt5]
+    source-tag: canary-1343
+    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/bin/citra-canary]
+    after: [prepare]
+  
+  citra-nightly:
+    plugin: cmake
+    source: https://github.com/citra-emu/citra-nightly.git
+    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/bin/citra-nightly]
+    after: [citra-canary]
+    
   desktop-qt5:
     build-packages: [build-essential, qtbase5-dev, dpkg-dev]
-    make-parameters:
-      - FLAVOR=qt5
+    make-parameters: [FLAVOR=qt5]
     plugin: make
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: qt
     stage-packages: [libxkbcommon0, ttf-ubuntu-font-family, dmz-cursor-theme, light-themes, adwaita-icon-theme, gnome-themes-standard, shared-mime-info, libqt5gui5, libgdk-pixbuf2.0-0, libqt5svg5, try: [appmenu-qt5, locales-all, xdg-user-dirs, fcitx-frontend-qt5]]
+
 apps:
+
   citra-canary:
-    command: desktop-launch $SNAP/bin/citra-qt
-    plugs: [home, network, pulseaudio, x11, desktop, desktop-legacy, opengl]
+    command: desktop-launch bin/citra-canary/citra-qt
+    plugs: [home, network, pulseaudio, alsa, x11, wayland, desktop, desktop-legacy, opengl, screen-inhibit-control]
+    desktop: citra-canary/share/applications/citra.desktop
+
+  citra-nightly:
+    command: desktop-launch bin/citra-nightly/citra-qt
+    plugs: [home, network, pulseaudio, alsa, x11, wayland, desktop, desktop-legacy, opengl, screen-inhibit-control]
+    desktop: citra-nightly/share/applications/citra.desktop
