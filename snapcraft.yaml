@@ -18,7 +18,7 @@ parts:
     stage-packages: [libfdk-aac-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
     override-build: |
       mkdir build && cd build
-      cmake ../src -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
+      cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
       make
       cp -r bin $SNAPCRAFT_PART_INSTALL/bin
     after: [desktop-qt5]
