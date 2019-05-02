@@ -21,7 +21,6 @@ parts:
     stage-snaps: [ffmpeg]
     build-packages: [pkg-config, dpkg-dev, build-essential, libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
     stage-packages: [libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
-    after: [desktop-qt5]
 
   wrapper:
     plugin: nil
@@ -43,14 +42,6 @@ parts:
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/bin/nightly]
     after: [citra-canary]
     
-  desktop-qt5:
-    build-packages: [build-essential, qtbase5-dev, dpkg-dev]
-    make-parameters: [FLAVOR=qt5 -j $SNAPCRAFT_PARALLEL_BUILD_COUNT]
-    plugin: make
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-subdir: qt
-    stage-packages: [libxkbcommon0, ttf-ubuntu-font-family, dmz-cursor-theme, light-themes, adwaita-icon-theme, gnome-themes-standard, shared-mime-info, libqt5gui5, libgdk-pixbuf2.0-0, libqt5svg5, try: [appmenu-qt5, locales-all, xdg-user-dirs, fcitx-frontend-qt5]]
-
 apps:
 
   citra-canary:
