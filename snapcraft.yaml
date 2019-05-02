@@ -1,9 +1,10 @@
 name: citra-mts
 version: git
-confinement: strict
+confinement: classic
 base: core18
 grade: stable
 #icon: https://github.com/citra-emu/citra/raw/master/dist/icon.png
+
 architectures:
   - build-on: [amd64]
     run-on: [amd64]
@@ -23,20 +24,39 @@ parts:
   citra-canary:
     plugin: cmake
     source: https://github.com/citra-emu/citra-canary.git
-    source-tag: canary-1343
+    #source-tag: canary-1345
+    organize: 
+      'canary/bin/citra': 'bin/citra-canary'
+      'canary/bin/citra-qt': 'bin/citra-canary-qt'
+      'canary/bin/citra-room': 'bin/citra-canary-room'
+      'canary/share/applications/citra.desktop': 'canary/share/applications/citra-mts-canary.desktop'
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/canary]
+    override-build: |
+      snapcraftctl build
+      sed -i 's|Icon=citra|Icon=${SNAP}/canary/share/icons/hicolor/scalable/apps/citra.svg|' ${SNAPCRAFT_PART_INSTALL}/canary/share/applications/citra.desktop
+      sed -i 's|Name=Citra|Name=Citra-MTS-Canary|' ${SNAPCRAFT_PART_INSTALL}/canary/share/applications/citra.desktop
+      sed -i 's|TryExec=citra-qt|TryExec=$SANP/bin/citra-canary-qt|' ${SNAPCRAFT_PART_INSTALL}/canary/share/applications/citra.desktop
     after: [prepare]
   
   citra-nightly:
     plugin: cmake
     source: https://github.com/citra-emu/citra-nightly.git
+    organize: 
+      'nightly/bin/citra': 'bin/citra-nightly'
+      'nightly/bin/citra-qt': 'bin/citra-nightly-qt'
+      'nightly/bin/citra-room': 'bin/citra-nightly-room'
+      'nightly/share/applications/citra.desktop': 'nightly/share/applications/citra-mts-nightly.desktop'
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/nightly]
+    override-build: |
+      snapcraftctl build
+      sed -i 's|Icon=citra|Icon=${SNAP}/nightly/share/icons/hicolor/scalable/apps/citra.svg|' ${SNAPCRAFT_PART_INSTALL}/nightly/share/applications/citra.desktop
+      sed -i 's|Name=Citra|Name=Citra-MTS-Canary|' ${SNAPCRAFT_PART_INSTALL}/nightly/share/applications/citra.desktop
+      sed -i 's|TryExec=citra-qt|TryExec=$SANP/bin/citra-nightly-qt|' ${SNAPCRAFT_PART_INSTALL}/nightly/share/applications/citra.desktop
     after: [prepare]
 
   desktop-qt5:
     build-packages: [build-essential, qtbase5-dev, dpkg-dev]
-    make-parameters:
-      - FLAVOR=qt5
+    make-parameters: [FLAVOR=qt5]
     plugin: make
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: qt
@@ -45,11 +65,11 @@ parts:
 apps:
 
   citra-canary:
-    command: bin/desktop-launch $SNAP/canary/bin/citra-qt
-    plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control]
-    #desktop: canary/share/applications/citra.desktop
+    command: bin/desktop-launch $SNAP/bin/citra-canary-qt
+    plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, dbus, libvirt, removable-media, personal-files, joystick, io-ports-control]
+    desktop: canary/share/applications/citra-mts-canary.desktop
 
   citra-nightly:
-    command: bin/desktop-launch $SNAP/nightly/bin/citra-qt
-    plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control]
-    #desktop: nightly/share/applications/citra.desktop
+    command: bin/desktop-launch $SNAP/bin/citra-nightly-qt
+    plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, dbus, libvirt, removable-media, personal-files, joystick, io-ports-control]
+    desktop: nightly/share/applications/citra-mts-nightly.desktop
