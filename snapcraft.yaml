@@ -50,6 +50,6 @@ apps:
     #desktop: canary/share/applications/citra.desktop
 
   citra-nightly:
-    command: $SNAP/bin/desktop-launch $SNAP/nightly/bin/citra-qt
+    command: sh $SNAP/nightly/bin/citra-qt
     plugs: [home, network, pulseaudio, alsa, x11, desktop, desktop-legacy, opengl, screen-inhibit-control]
     #desktop: nightly/share/applications/citra.desktop
