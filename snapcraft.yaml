@@ -45,7 +45,7 @@ parts:
 apps:
 
   citra-canary:
-    command: $SNAP/bin/desktop-launch $SNAP/canary/bin/citra-qt
+    command: sh $SNAP/canary/bin/citra-qt
     plugs: [home, network, pulseaudio, alsa, x11, desktop, desktop-legacy, opengl, screen-inhibit-control]
     #desktop: canary/share/applications/citra.desktop
 
