@@ -17,17 +17,8 @@ parts:
 
   prepare:
     plugin: nil
-    build-snaps: [ffmpeg]
-    stage-snaps: [ffmpeg]
     build-packages: [pkg-config, dpkg-dev, build-essential, libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
-    stage-packages: [libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
-
-  wrapper:
-    plugin: nil
-    organize:
-      'citra-canary': canary
-      'citra-nightly': nightly
-    after: [citra-nightly]
+    stage-packages: [libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev, libpulse0]
   
   citra-canary:
     plugin: cmake
@@ -40,16 +31,25 @@ parts:
     plugin: cmake
     source: https://github.com/citra-emu/citra-nightly.git
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/nightly]
-    after: [citra-canary]
+    after: [prepare]
+
+  desktop-qt5:
+    build-packages: [build-essential, qtbase5-dev, dpkg-dev]
+    make-parameters:
+      - FLAVOR=qt5
+    plugin: make
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: qt
+    stage-packages: [libxkbcommon0, ttf-ubuntu-font-family, dmz-cursor-theme, light-themes, adwaita-icon-theme, gnome-themes-standard, shared-mime-info, libqt5gui5, libgdk-pixbuf2.0-0, libqt5svg5, try: [appmenu-qt5, locales-all, xdg-user-dirs, fcitx-frontend-qt5]]
     
 apps:
 
   citra-canary:
-    command: bin/sh canary/bin/citra-qt
-    plugs: [home, network, pulseaudio, alsa, x11, desktop, desktop-legacy, opengl, screen-inhibit-control]
+    command: bin/desktop-launch $SNAP/canary/bin/citra-qt
+    plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control]
     #desktop: canary/share/applications/citra.desktop
 
   citra-nightly:
-    command: bin/sh nightly/bin/citra-qt
-    plugs: [home, network, pulseaudio, alsa, x11, desktop, desktop-legacy, opengl, screen-inhibit-control]
+    command: bin/desktop-launch $SNAP/nightly/bin/citra-qt
+    plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control]
     #desktop: nightly/share/applications/citra.desktop
