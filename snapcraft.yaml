@@ -45,11 +45,11 @@ parts:
 apps:
 
   citra-canary:
-    command: sh $SNAP/canary/bin/citra-qt
+    command: $SNAP/canary/bin/citra-qt
     plugs: [home, network, pulseaudio, alsa, x11, desktop, desktop-legacy, opengl, screen-inhibit-control]
     #desktop: canary/share/applications/citra.desktop
 
   citra-nightly:
-    command: sh $SNAP/nightly/bin/citra-qt
+    command: $SNAP/nightly/bin/citra-qt
     plugs: [home, network, pulseaudio, alsa, x11, desktop, desktop-legacy, opengl, screen-inhibit-control]
     #desktop: nightly/share/applications/citra.desktop
