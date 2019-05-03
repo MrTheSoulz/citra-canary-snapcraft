@@ -25,11 +25,6 @@ parts:
     plugin: cmake
     source: https://github.com/citra-emu/citra-canary.git
     #source-tag: canary-1345
-    organize: 
-      #'canary/bin/citra': 'bin/citra-canary'
-      #'canary/bin/citra-qt': 'bin/citra-canary-qt'
-      #'canary/bin/citra-room': 'bin/citra-canary-room'
-      'canary/share/applications/citra.desktop': 'canary/share/applications/citra-mts-canary.desktop'
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/canary]
     override-build: |
       snapcraftctl build
@@ -41,11 +36,6 @@ parts:
   citra-nightly:
     plugin: cmake
     source: https://github.com/citra-emu/citra-nightly.git
-    organize: 
-      #'nightly/bin/citra': 'bin/citra-nightly'
-      #'nightly/bin/citra-qt': 'bin/citra-nightly-qt'
-      #'nightly/bin/citra-room': 'bin/citra-nightly-room'
-      'nightly/share/applications/citra.desktop': 'nightly/share/applications/citra-mts-nightly.desktop'
     configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/nightly]
     override-build: |
       snapcraftctl build
@@ -67,9 +57,9 @@ apps:
   citra-canary:
     command: bin/desktop-launch $SNAP/canary/bin/citra-qt
     plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, dbus, libvirt, removable-media, personal-files, joystick, io-ports-control]
-    desktop: $SNAP/canary/share/applications/citra-mts-canary.desktop
+    desktop: $SNAP/canary/share/applications/citra.desktop
 
   citra-nightly:
     command: bin/desktop-launch $SNAP/nightly/bin/citra-qt
     plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, dbus, libvirt, removable-media, personal-files, joystick, io-ports-control]
-    desktop: $SNAP/nightly/share/applications/citra-mts-nightly.desktop
+    desktop: $SNAP/nightly/share/applications/citra.desktop
