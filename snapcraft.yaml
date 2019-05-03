@@ -67,9 +67,9 @@ apps:
   citra-canary:
     command: bin/desktop-launch $SNAP/bin/citra-canary-qt
     plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, dbus, libvirt, removable-media, personal-files, joystick, io-ports-control]
-    desktop: canary/share/applications/citra-mts-canary.desktop
+    desktop: $SNAP/canary/share/applications/citra-mts-canary.desktop
 
   citra-nightly:
     command: bin/desktop-launch $SNAP/bin/citra-nightly-qt
     plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, dbus, libvirt, removable-media, personal-files, joystick, io-ports-control]
-    desktop: nightly/share/applications/citra-mts-nightly.desktop
+    desktop: $SNAP/nightly/share/applications/citra-mts-nightly.desktop
