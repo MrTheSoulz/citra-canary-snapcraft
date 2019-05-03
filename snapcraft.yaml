@@ -1,6 +1,6 @@
 name: citra-mts
 version: git
-confinement: classic
+confinement: strict
 base: core18
 grade: stable
 #icon: https://github.com/citra-emu/citra/raw/master/dist/icon.png
