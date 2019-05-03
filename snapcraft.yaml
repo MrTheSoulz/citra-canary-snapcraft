@@ -30,7 +30,7 @@ parts:
       'canary/bin/citra-qt': 'bin/citra-canary-qt'
       'canary/bin/citra-room': 'bin/citra-canary-room'
       'canary/share/applications/citra.desktop': 'canary/share/applications/citra-mts-canary.desktop'
-    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/canary]
+    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=canary]
     override-build: |
       snapcraftctl build
       sed -i 's|Icon=citra|Icon=${SNAP}/canary/share/icons/hicolor/scalable/apps/citra.svg|' ${SNAPCRAFT_PART_INSTALL}/canary/share/applications/citra.desktop
@@ -46,7 +46,7 @@ parts:
       'nightly/bin/citra-qt': 'bin/citra-nightly-qt'
       'nightly/bin/citra-room': 'bin/citra-nightly-room'
       'nightly/share/applications/citra.desktop': 'nightly/share/applications/citra-mts-nightly.desktop'
-    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/nightly]
+    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=nightly]
     override-build: |
       snapcraftctl build
       sed -i 's|Icon=citra|Icon=${SNAP}/nightly/share/icons/hicolor/scalable/apps/citra.svg|' ${SNAPCRAFT_PART_INSTALL}/nightly/share/applications/citra.desktop
