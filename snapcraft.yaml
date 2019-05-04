@@ -52,6 +52,23 @@ parts:
     source-subdir: qt
     stage-packages: [libxkbcommon0, ttf-ubuntu-font-family, dmz-cursor-theme, light-themes, adwaita-icon-theme, gnome-themes-standard, shared-mime-info, libqt5gui5, libgdk-pixbuf2.0-0, libqt5svg5, try: [appmenu-qt5, locales-all, xdg-user-dirs, fcitx-frontend-qt5]]
     
+plugs:
+
+  gnome-3-28-1804:
+    interface: content
+    target: $SNAP/gnome-platform
+    default-provider: gnome-3-28-1804
+  
+  gtk-3-themes:
+    interface: content
+    target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes
+
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes
+
 apps:
 
   citra-canary:
