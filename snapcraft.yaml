@@ -43,6 +43,20 @@ parts:
       sed -i 's|Name=Citra|Name=Citra-MTS-Nightly|' ${SNAPCRAFT_PART_INSTALL}/nightly/share/applications/citra.desktop
       sed -i 's|TryExec=citra-qt|TryExec=$SANP/bin/citra-qt|' ${SNAPCRAFT_PART_INSTALL}/nightly/share/applications/citra.desktop
     after: [prepare]
+  
+  #  TEST
+  citra-FDKACC:
+    plugin: cmake
+    source: https://github.com/liushuyu/citra.git
+    source-branch: 'fdk_aac'
+    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/FDKACC]
+    stage-packages: [libfdk-aac-dev]
+    override-build: |
+      snapcraftctl build
+      sed -i 's|Icon=citra|Icon=${SNAP}/canary/share/icons/hicolor/scalable/apps/citra.svg|' ${SNAPCRAFT_PART_INSTALL}/FDKACC/share/applications/citra.desktop
+      sed -i 's|Name=Citra|Name=Citra-MTS-FDKACC|' ${SNAPCRAFT_PART_INSTALL}/FDKACC/share/applications/citra.desktop
+      sed -i 's|TryExec=citra-qt|TryExec=$SANP/bin/citra-qt|' ${SNAPCRAFT_PART_INSTALL}/FDKACC/share/applications/citra.desktop
+    after: [prepare]
 
   desktop-qt5:
     build-packages: [build-essential, qtbase5-dev, dpkg-dev]
@@ -80,3 +94,8 @@ apps:
     command: bin/desktop-launch $SNAP/nightly/bin/citra-qt
     plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, dbus, libvirt, removable-media, joystick, io-ports-control]
     desktop: nightly/share/applications/citra.desktop
+    
+  citra-FDKACC:
+    command: bin/desktop-launch $SNAP/FDKACC/bin/citra-qt
+    plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, dbus, libvirt, removable-media, joystick, io-ports-control]
+    desktop: FDKACC/share/applications/citra.desktop
