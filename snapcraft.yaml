@@ -49,7 +49,7 @@ parts:
     plugin: cmake
     source: https://github.com/liushuyu/citra.git
     source-branch: 'fdk_aac'
-    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/FDKACC]
+    configflags: [-DCMAKE_BUILD_TYPE=Release, -DCMAKE_INSTALL_PREFIX=/FDKACC,-DENABLE_FFMPEG=ON]
     stage-packages: [libfdk-aac-dev]
     override-build: |
       snapcraftctl build
