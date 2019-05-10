@@ -6,8 +6,7 @@ grade: stable
 #icon: https://github.com/citra-emu/citra/raw/master/dist/icon.png
 
 architectures:
-  - build-on: [amd64]
-    run-on: [amd64]
+  - build-on: amd64
 
 summary: Nintendo 3DS Emulator
 description: |
@@ -75,8 +74,18 @@ apps:
     command: bin/desktop-launch $SNAP/canary/bin/citra-qt
     plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, dbus, libvirt, removable-media, joystick, io-ports-control]
     desktop: canary/share/applications/citra.desktop
+    environment:
+      # Fallback to XWayland if running in a Wayland session.
+      DISABLE_WAYLAND: 1
+      HOME: "$SNAP_USER_COMMON"
+      LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/blas:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio"
 
   citra-nightly:
     command: bin/desktop-launch $SNAP/nightly/bin/citra-qt
     plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, dbus, libvirt, removable-media, joystick, io-ports-control]
     desktop: nightly/share/applications/citra.desktop
+    environment:
+      # Fallback to XWayland if running in a Wayland session.
+      DISABLE_WAYLAND: 1
+      HOME: "$SNAP_USER_COMMON"
+      LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/blas:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio"
