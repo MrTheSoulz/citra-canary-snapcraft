@@ -77,7 +77,7 @@ apps:
 
   citra-canary:
     command: bin/desktop-launch $SNAP/canary/bin/citra-qt
-    plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, dbus, libvirt, removable-media, joystick, io-ports-control]
+    plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, libvirt, removable-media, joystick, io-ports-control]
     desktop: canary/share/applications/citra.desktop
     environment:
       # Fallback to XWayland if running in a Wayland session.
@@ -87,7 +87,7 @@ apps:
 
   citra-nightly:
     command: bin/desktop-launch $SNAP/nightly/bin/citra-qt
-    plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, dbus, libvirt, removable-media, joystick, io-ports-control]
+    plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, libvirt, removable-media, joystick, io-ports-control]
     desktop: nightly/share/applications/citra.desktop
     environment:
       # Fallback to XWayland if running in a Wayland session.
