@@ -51,46 +51,18 @@ parts:
     source-subdir: qt
     stage-packages: [libxkbcommon0, ttf-ubuntu-font-family, dmz-cursor-theme, light-themes, adwaita-icon-theme, gnome-themes-standard, shared-mime-info, libqt5gui5, libgdk-pixbuf2.0-0, libqt5svg5, try: [appmenu-qt5, locales-all, xdg-user-dirs, fcitx-frontend-qt5]]
     
-plugs:
-
-  gtk-3-themes:
-    interface: content
-    target: $SNAP/data-dir/themes
-    default-provider: gtk-common-themes:gtk-3-themes
-    
-  gtk-2-themes:
-    interface: content
-    target: $SNAP/data-dir/themes
-    default-provider: gtk-common-themes:gtk-2-themes
-    
-  icon-themes:
-    interface: content
-    target: $SNAP/data-dir/icons
-    default-provider: gtk-common-themes:icon-themes
-    
-  sound-themes:
-    interface: content
-    target: $SNAP/data-dir/sounds
-    default-provider: gtk-common-themes:sounds-themes
-
 apps:
 
   citra-canary:
-    command: bin/desktop-launch $SNAP/canary/bin/citra-qt
-    plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, libvirt, removable-media, joystick, io-ports-control]
+    command: $SNAP/canary/bin/citra-qt
     desktop: canary/share/applications/citra.desktop
+    extensions: [gnome-3-34]
     environment:
-      # Fallback to XWayland if running in a Wayland session.
-      DISABLE_WAYLAND: 1
-      HOME: "$SNAP_USER_COMMON"
-      LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/blas:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio"
+      DISABLE_WAYLAND: 1 # Fallback to XWayland if running in a Wayland session. probably missing something to enable wayland...
 
   citra-nightly:
-    command: bin/desktop-launch $SNAP/nightly/bin/citra-qt
-    plugs: [home, network, desktop, desktop-legacy, wayland, opengl, pulseaudio, gsettings, x11, screen-inhibit-control, kvm, libvirt, removable-media, joystick, io-ports-control]
+    command: $SNAP/nightly/bin/citra-qt
     desktop: nightly/share/applications/citra.desktop
+    extensions: [gnome-3-34]
     environment:
-      # Fallback to XWayland if running in a Wayland session.
-      DISABLE_WAYLAND: 1
-      HOME: "$SNAP_USER_COMMON"
-      LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/blas:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio"
+      DISABLE_WAYLAND: 1 # Fallback to XWayland if running in a Wayland session. probably missing something to enable wayland...
