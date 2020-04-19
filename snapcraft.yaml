@@ -17,8 +17,8 @@ parts:
 
   ffmpeg:
     plugin: nil
-    build-packages: [libfdk-aac-dev, ffmpeg, libswscale-dev, libavdevice58, libavformat-dev, libavcodec-dev, libavdevice-dev, libavcodec-extra]
-    stage-packages: [libfdk-aac1, ffmpeg, libswscale5, libavdevice58, libavformat58, libavcodec58, libavdevice58, libavcodec-extra]
+    build-packages: [libfdk-aac-dev, ffmpeg, libswscale-dev, libavformat-dev, libavcodec-dev, libavdevice-dev, libavcodec-extra]
+    stage-packages: [libfdk-aac1, ffmpeg, libswscale5, libavdevice58, libavformat58, libavcodec58, libavcodec-extra]
 
   prepare:
     plugin: nil
