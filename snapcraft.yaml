@@ -18,7 +18,7 @@ parts:
   prepare:
     plugin: nil
     build-packages: [pkg-config, dpkg-dev, build-essential, libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev, libqt5x11extras5-dev]
-    stage-packages: [qtwayland5, qtbase5, libqt5opengl5, qtmultimedia5, libpulse0, libqt5multimedia5-plugins, libqt5x11extras5]
+    stage-packages: [qtwayland5, sdl2, qtbase5, libqt5opengl5, qtmultimedia5, libpulse0, libqt5multimedia5-plugins, libqt5x11extras5]
   
   citra-canary:
     plugin: cmake
