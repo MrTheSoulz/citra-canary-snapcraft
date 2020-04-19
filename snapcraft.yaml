@@ -35,7 +35,7 @@ parts:
       sed -i 's|Icon=citra|Icon=${SNAP}/canary/share/icons/hicolor/scalable/apps/citra.svg|' ${SNAPCRAFT_PART_INSTALL}/canary/share/applications/citra.desktop
       sed -i 's|Name=Citra|Name=Citra-MTS-Canary|' ${SNAPCRAFT_PART_INSTALL}/canary/share/applications/citra.desktop
       sed -i 's|TryExec=citra-qt|TryExec=$SANP/bin/citra-qt|' ${SNAPCRAFT_PART_INSTALL}/canary/share/applications/citra.desktop
-    after: [prepare]
+    after: [prepare, ffmpeg]
   
   citra-nightly:
     plugin: cmake
@@ -46,7 +46,7 @@ parts:
       sed -i 's|Icon=citra|Icon=${SNAP}/nightly/share/icons/hicolor/scalable/apps/citra.svg|' ${SNAPCRAFT_PART_INSTALL}/nightly/share/applications/citra.desktop
       sed -i 's|Name=Citra|Name=Citra-MTS-Nightly|' ${SNAPCRAFT_PART_INSTALL}/nightly/share/applications/citra.desktop
       sed -i 's|TryExec=citra-qt|TryExec=$SANP/bin/citra-qt|' ${SNAPCRAFT_PART_INSTALL}/nightly/share/applications/citra.desktop
-    after: [prepare]
+    after: [prepare, ffmpeg]
     
 apps:
 
