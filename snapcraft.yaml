@@ -17,8 +17,8 @@ parts:
 
   prepare:
     plugin: nil
-    build-packages: [pkg-config, dpkg-dev, build-essential, libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev]
-    stage-packages: [qtwayland5, libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev, libpulse0, libqt5multimedia5-plugins]
+    build-packages: [pkg-config, dpkg-dev, build-essential, libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev, libqt5x11extras5-dev]
+    stage-packages: [qtwayland5, libsdl2, qtbase5-dev, libqt5opengl5, qtmultimedia5, libpulse0, libqt5multimedia5-plugins, libqt5x11extras5]
   
   citra-canary:
     plugin: cmake
@@ -42,14 +42,6 @@ parts:
       sed -i 's|Name=Citra|Name=Citra-MTS-Nightly|' ${SNAPCRAFT_PART_INSTALL}/nightly/share/applications/citra.desktop
       sed -i 's|TryExec=citra-qt|TryExec=$SANP/bin/citra-qt|' ${SNAPCRAFT_PART_INSTALL}/nightly/share/applications/citra.desktop
     after: [prepare]
-
-  desktop-qt5:
-    build-packages: [build-essential, qtbase5-dev, dpkg-dev]
-    make-parameters: [FLAVOR=qt5]
-    plugin: make
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-subdir: qt
-    stage-packages: [libxkbcommon0, ttf-ubuntu-font-family, dmz-cursor-theme, light-themes, adwaita-icon-theme, gnome-themes-standard, shared-mime-info, libqt5gui5, libgdk-pixbuf2.0-0, libqt5svg5, try: [appmenu-qt5, locales-all, xdg-user-dirs, fcitx-frontend-qt5]]
     
 apps:
 
@@ -59,6 +51,7 @@ apps:
     extensions: [gnome-3-34]
     environment:
       DISABLE_WAYLAND: 1 # Fallback to XWayland if running in a Wayland session. probably missing something to enable wayland...
+      QT_DEBUG_PLUGINS: 1
 
   citra-nightly:
     command: $SNAP/nightly/bin/citra-qt
@@ -66,3 +59,4 @@ apps:
     extensions: [gnome-3-34]
     environment:
       DISABLE_WAYLAND: 1 # Fallback to XWayland if running in a Wayland session. probably missing something to enable wayland...
+      QT_DEBUG_PLUGINS: 1
