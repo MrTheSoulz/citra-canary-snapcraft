@@ -17,13 +17,11 @@ parts:
 
   ffmpeg:
     plugin: nil
-    build-packages: [libfdk-aac-dev, ffmpeg, libswscale-dev, libavformat-dev, libavcodec-dev, libavdevice-dev, libavcodec-extra]
-    stage-packages: [libfdk-aac1, ffmpeg, libswscale-dev, libavdevice57, libavformat57, libavcodec57, libavcodec-extra]
+    stage-packages: [libfdk-aac-dev, ffmpeg, libswscale-dev, libavformat-dev, libavcodec-dev, libavdevice-dev, libavcodec-extra]
 
   prepare:
     plugin: nil
-    build-packages: [pkg-config, dpkg-dev, build-essential, libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev, libqt5x11extras5-dev]
-    stage-packages: [qtwayland5, libsdl2-2.0-0, qtbase5-dev, libqt5opengl5, qtmultimedia5-dev, libpulse0, libqt5multimedia5-plugins, libqt5x11extras5, libfdk-aac1]
+    stage-packages: [pkg-config, dpkg-dev, build-essential, libsdl2-dev, qtbase5-dev, libqt5opengl5-dev, qtmultimedia5-dev, libqt5x11extras5-dev]
   
   citra-canary:
     plugin: cmake
